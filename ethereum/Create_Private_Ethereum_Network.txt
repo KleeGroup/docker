@@ -1,0 +1,34 @@
+
+1- Creation des comptes 
+./createaccount.sh
+
+2- Génération du block genesis
+#Modifier le fichier ./genesis.sh pour ajouter les comptes à créditer
+./genesis.sh 
+
+3- Lancement du noeud bootstrap
+./bootnode.sh
+
+4- Lancement de n noeuds simples
+#Param 1 : nom conteneur
+#Param 2 : activation du mode RPC et mapping du port 8545
+./runnode.sh node1 true
+./runnode.sh node2 false
+
+5- Lancement de n mineurs
+#Param 1 : nom conteneur
+#Prama 2 : adresse du mineur
+./runminer.sh miner1 0x2e61cf9f966d4e66a0912d3116008cf8e47cb32e
+./runminer.sh miner2 0x649cfcda2850cad3645d11b177b9b1f55e03ea48
+./runminer.sh miner3 0xe20ff479979afb605e1c5597a6c17b07038da94b
+./runminer.sh miner4 0x451ae15dba9de67a3a045633b8f69de59e18e5a0
+./runminer.sh miner5 0x839fcb30f017335e047042d3b504055e2340387b
+
+6- Affichage des peers
+./showpeers.sh
+./showpeers.sh miner1
+
+7- Affichage des logs
+docker logs -f ethereum-miner1
+docker logs ethereum-node1
+
