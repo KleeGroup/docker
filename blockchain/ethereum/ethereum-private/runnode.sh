@@ -13,12 +13,13 @@ RPC_PORTMAP=
 RPC_ARG=
 RPC_PORT=8545
 ENABLE_RPC=$2
-#LIMIT_CPU="--cpus=.5"
-LIMIT_CPU=
+LIMIT_CPU="--cpus=.05"
+#LIMIT_CPU=
 if [[ "$ENABLE_RPC" = "true" ]]; then
-#    RPC_ARG='--ws --wsaddr=0.0.0.0 --wsport 8546 --wsapi=db,eth,net,web3,personal --wsorigins "*" --rpc --rpcaddr=0.0.0.0 --rpcport 8545 --rpcapi=db,eth,net,web3,personal --rpccorsdomain "*"'
-    RPC_ARG='--rpc --rpcaddr=0.0.0.0 --rpcport=8545 --rpcapi=db,eth,net,web3,personal --rpccorsdomain=* --rpcvhosts=*'
-    RPC_PORTMAP="-p $RPC_PORT:8545"
+    RPC_ARG='--ws --wsaddr=0.0.0.0 --wsport 8546 --wsapi=db,eth,net,web3,personal --wsorigins=* --rpc --rpcaddr=0.0.0.0 --rpcport 8545 --rpcapi=db,eth,net,web3,personal --rpccorsdomain=* --rpcvhosts=*'
+    RPC_PORTMAP="-p $RPC_PORT:8545 -p 8546:8546"
+    #RPC_ARG='--rpc --rpcaddr=0.0.0.0 --rpcport=8545 --rpcapi=db,eth,net,web3,personal --rpccorsdomain=* --rpcvhosts=*'
+    #RPC_PORTMAP="-p $RPC_PORT:8545"
 fi
 BOOTNODE_URL=${BOOTNODE_URL:-$(./getbootnodeurl.sh)}
 if [ ! -f $(pwd)/genesis.json ]; then
