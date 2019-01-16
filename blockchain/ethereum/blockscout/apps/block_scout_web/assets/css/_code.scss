@@ -1,0 +1,15 @@
+pre {
+  white-space: pre-wrap;
+}
+
+.pre-wrap code {
+  white-space: pre-wrap;
+}
+
+.pre-scrollable-shorty {
+  max-height: $pre-scrollable-max-height / 7;
+}
+
+.tile pre  {
+  margin-bottom: 0;
+}

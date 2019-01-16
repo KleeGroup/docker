@@ -1,0 +1,39 @@
+<section class="container">
+  <%= render BlockScoutWeb.AddressView, "overview.html", assigns %>
+
+  <section>
+    <div class="card">
+      <div class="card-header">
+        <%= render BlockScoutWeb.AddressView, "_tabs.html", assigns %>
+      </div>
+
+      <div class="card-body">
+        <h2 class="card-title"><%= gettext "Tokens" %></h2>
+        <%= if Enum.any?(@tokens) do %>
+          <%= for token <- @tokens do %>
+            <%= render "_tokens.html", conn: @conn, token: token, address: @address %>
+          <% end %>
+        <% else %>
+          <div class="tile tile-muted text-center">
+            <span><%= gettext "There are no tokens for this address." %></span>
+          </div>
+        <% end %>
+
+        <div>
+          <%= if @next_page_params do %>
+            <%= link(
+              gettext("Next"),
+              class: "button button-secondary button-sm float-right mt-3",
+              to: address_token_path(
+                @conn,
+                :index,
+                @address,
+                @next_page_params
+              )
+            ) %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>

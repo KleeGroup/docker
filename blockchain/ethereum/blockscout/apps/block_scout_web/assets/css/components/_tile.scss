@@ -1,0 +1,214 @@
+.tile {
+  font-size: 12px;
+  color: $text-muted;
+  line-height: 1.4rem;
+  border: 1px solid $border-color;
+  border-radius: 2px;
+  padding: 1rem;
+  box-shadow: 0 1px 5px rgba($black, 0.15);
+
+  & + & {
+    margin-top: 1rem;
+  }
+
+  @include media-breakpoint-down(md) {
+    margin-bottom: 1rem;
+  }
+
+  &-type {
+
+    &-block {
+      border-left: 4px solid $indigo;
+
+      .tile-label {
+        color: $indigo;
+      }
+    }
+
+    &-uncle {
+      border-left: 4px solid $cyan;
+
+      .tile-label {
+        color: $cyan;
+      }
+    }
+
+    &-reorg {
+      border-left: 4px solid $purple;
+
+      .tile-label {
+        color: $purple;
+      }
+    }
+
+    &-emission-reward {
+      border-left: 4px solid $lilac;
+
+      .tile-label {
+        color: $lilac;
+      }
+    }
+
+    &-transaction {
+      border-left: 4px solid $blue;
+
+      .tile-label {
+        color: $blue;
+      }
+    }
+
+    &-contract-call {
+      border-left: 4px solid $green;
+
+      .tile-label {
+        color: $green;
+      }
+    }
+
+    &-contract-creation {
+      border-left: 4px solid $pink;
+
+      .tile-label {
+        color: $pink;
+      }
+
+      .tile-text-highlight {
+        text-decoration: underline;
+        text-decoration-style: dashed;
+      }
+    }
+
+    &-token {
+      border: 1px solid $border-color;
+    }
+
+    &-token-transfer {
+      border-left: 4px solid $orange;
+      padding-bottom: 10px;
+
+      .tile-label {
+        color: $orange;
+      }
+
+      &-short-name {
+        overflow: hidden;
+        max-width: 45%;
+        vertical-align: middle;
+        text-overflow: ellipsis;
+      }
+    }
+
+    &-unique-token {
+      border-left: 4px solid $orange;
+      padding: 35px 0;
+
+      .tile-label {
+        color: $orange;
+      }
+    }
+
+    &-unique-token-image{
+      border-left: 4px solid $orange;
+      padding: 0;
+
+      .tile-label {
+        color: $orange;
+      }
+
+      & .tile-content {
+        padding: 45px 0;
+      }
+    }
+
+    &-internal-transaction {
+      border-left: 4px solid $teal;
+
+      .tile-label {
+        color: $teal;
+      }
+    }
+
+    &-api-documentation {
+      border-left: 4px solid $primary;
+      background-color: transparent;
+      width: 100%;
+      text-align: left;
+      padding: 15px;
+      cursor: pointer;
+
+      .tile-label {
+        color: $primary;
+      }
+    }
+  }
+
+  &-status {
+    &--error--reason {
+      border-top: 2px solid lighten($danger, 10%);
+      border-right: 2px solid lighten($danger, 10%);
+      border-bottom: 2px solid lighten($danger, 10%);
+
+      .tile-status-label {
+        color: $danger;
+      }
+    }
+    &--awaiting-internal-transactions {
+      border-top: 2px solid lighten($warning, 10%);
+      border-right: 2px solid lighten($warning, 10%);
+      border-bottom: 2px solid lighten($warning, 10%);
+
+      .tile-status-label {
+        color: $warning;
+      }
+    }
+  }
+}
+
+.tile-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: $gray-700;
+  margin-bottom: 0;
+
+  &-hash {
+    font-weight: 300;
+  }
+
+  &-lg {
+    font-size: 16px;
+    color: $body-color;
+  }
+}
+
+.tile-badge {
+  margin-bottom: 0.1rem;
+  padding: 0;
+  width: 2.5rem;
+  line-height: 1.25rem;
+  text-align: center;
+}
+
+.tile-muted {
+  border-left: 1px solid $border-color;
+  background-color: $gray-100;
+  box-shadow: none;
+}
+
+.tile-function-response {
+  span.function-response-item {
+    display: block;
+    margin-left: 1rem;
+
+    &:not(:last-of-type)::after {
+      content: ",";
+    }
+  }
+  p {
+    margin: 0;
+  }
+}
+
+.tile-image {
+  max-width: 140px;
+  max-height: 140px;
+}

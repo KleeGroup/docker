@@ -1,0 +1,62 @@
+defmodule BlockScoutWeb.TransactionLogController do
+  use BlockScoutWeb, :controller
+
+  import BlockScoutWeb.Chain, only: [paging_options: 1, next_page_params: 3, split_list_by_page: 1]
+
+  alias BlockScoutWeb.TransactionView
+  alias Explorer.{Chain, Market}
+  alias Explorer.ExchangeRates.Token
+
+  def index(conn, %{"transaction_id" => transaction_hash_string} = params) do
+    with {:ok, transaction_hash} <- Chain.string_to_transaction_hash(transaction_hash_string),
+         {:ok, transaction} <-
+           Chain.hash_to_transaction(
+             transaction_hash,
+             necessity_by_association: %{
+               :block => :optional,
+               [created_contract_address: :names] => :optional,
+               [from_address: :names] => :required,
+               [to_address: :names] => :optional,
+               [to_address: :smart_contract] => :optional,
+               :token_transfers => :optional
+             }
+           ) do
+      full_options =
+        Keyword.merge(
+          [
+            necessity_by_association: %{
+              address: :optional
+            }
+          ],
+          paging_options(params)
+        )
+
+      logs_plus_one = Chain.transaction_to_logs(transaction, full_options)
+
+      {logs, next_page} = split_list_by_page(logs_plus_one)
+
+      render(
+        conn,
+        "index.html",
+        logs: logs,
+        block_height: Chain.block_height(),
+        show_token_transfers: Chain.transaction_has_token_transfers?(transaction_hash),
+        next_page_params: next_page_params(next_page, logs, params),
+        transaction: transaction,
+        exchange_rate: Market.get_exchange_rate(Explorer.coin()) || Token.null()
+      )
+    else
+      :error ->
+        conn
+        |> put_status(422)
+        |> put_view(TransactionView)
+        |> render("invalid.html", transaction_hash: transaction_hash_string)
+
+      {:error, :not_found} ->
+        conn
+        |> put_status(404)
+        |> put_view(TransactionView)
+        |> render("not_found.html", transaction_hash: transaction_hash_string)
+    end
+  end
+end

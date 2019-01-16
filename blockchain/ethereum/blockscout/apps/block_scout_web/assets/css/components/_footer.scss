@@ -1,0 +1,48 @@
+$footer-height: 4rem;
+$footer-padding: 1em;
+$social-link-size: 2rem;
+$footer-text-color: rgba($white, 0.7);
+
+.footer {
+  font-size: 12px;
+  background: $primary;
+  color: $footer-text-color;
+  text-align: center;
+  margin-top: $footer-padding;
+  padding: $footer-padding;
+  position: relative;
+  line-height: $social-link-size;
+
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+.footer-body {
+  position: relative;
+}
+
+.footer-brand {
+  display: block;
+  position: absolute;
+  left: 0;
+  font-size: 1.25rem;
+  line-height: inherit;
+  white-space: nowrap;
+}
+
+.footer-logo {
+  height: 1.5em;
+}
+
+.footer .icon-links {
+  position: absolute;
+  right: 0;
+
+  @media (max-width: 768px) {
+    position: static;
+    justify-content: center;
+    margin-bottom: 5px;
+  }
+}

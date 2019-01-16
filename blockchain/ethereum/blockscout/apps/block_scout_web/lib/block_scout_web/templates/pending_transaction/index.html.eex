@@ -1,0 +1,51 @@
+<section class="container" data-page="transaction-pending-list">
+  <div class="card">
+    <div class="card-body" data-async-listing="<%= @current_path %>">
+
+      <h1><%= gettext "Pending Transactions" %></h1>
+      <p>
+        <%= gettext("Showing") %>
+        <span data-selector="transaction-pending-count"><%= Cldr.Number.to_string!(@pending_transaction_count, format: "#,###") %></span>
+        <%= gettext("Pending Transactions") %>
+      </p>
+
+      <div data-selector="channel-batching-message" style="display:none;">
+        <div data-selector="reload-button" class="alert alert-info">
+          <a href="#" class="alert-link"><span data-selector="channel-batching-count"></span> <%= gettext "More transactions have come in" %></a>
+        </div>
+      </div>
+      <div data-selector="channel-disconnected-message" style="display:none;">
+        <div data-selector="reload-button" class="alert alert-danger">
+          <a href="#" class="alert-link"><%= gettext "Connection Lost, click to load newer transactions" %></a>
+        </div>
+      </div>
+      <button data-error-message class="alert alert-danger col-12 text-left" style="display: none;">
+        <span href="#" class="alert-link"><%= gettext("Something went wrong, click to reload.") %></span>
+      </button>
+      <div data-empty-response-message class="tile tile-muted text-center" style="display: none;">
+        <span data-selector="empty-transactions-list">
+          <%= gettext "There are no pending transactions." %>
+        </span>
+      </div>
+      <div data-items data-selector="transactions-pending-list"></div>
+      <div data-loading-message class="tile tile-muted text-center mt-3" style="display: none;">
+        <span class="loading-spinner-small mr-2">
+          <span class="loading-spinner-block-1"></span>
+          <span class="loading-spinner-block-2"></span>
+        </span>
+        <%= gettext("Loading") %>...
+      </div>
+      <a href="#" class="button button-secondary button-small float-right mt-4" data-next-page-button style="display: none;">
+        <%= gettext("Older") %>
+      </a>
+      <div class="button button-secondary button-small float-right mt-4" data-loading-button style="display: none;">
+        <span class="loading-spinner-small mr-2">
+          <span class="loading-spinner-block-1"></span>
+          <span class="loading-spinner-block-2"></span>
+        </span>
+        <%= gettext("Loading") %>...
+      </div>
+    </div>
+
+  </div>
+</section>

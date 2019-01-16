@@ -1,0 +1,52 @@
+<section class="container">
+  <%= render(
+    OverviewView,
+    "_details.html",
+    token: @token,
+    total_token_transfers: @total_token_transfers,
+    total_token_holders: @total_token_holders,
+    conn: @conn
+  ) %>
+
+  <section>
+    <div class="card">
+      <div class="card-header">
+        <%= render OverviewView, "_tabs.html", assigns %>
+      </div>
+
+      <!-- Token Holders -->
+      <div class="card-body" data-async-load data-async-listing="<%= @current_path %>">
+        <h2 class="card-title"><%= gettext "Token Holders" %></h2>
+
+        <button data-error-message class="alert alert-danger col-12 text-left" style="display: none;">
+          <span href="#" class="alert-link"><%= gettext("Something went wrong, click to reload.") %></span>
+        </button>
+        <div data-empty-response-message style="display: none;">
+          <div class="tile tile-muted text-center">
+            <span data-selector="empty-transactions-list">
+              <%= gettext "There are no holders for this Token." %>
+            </span>
+          </div>
+        </div>
+        <div data-loading-message class="tile tile-muted text-center mt-3">
+          <span class="loading-spinner-small mr-2">
+            <span class="loading-spinner-block-1"></span>
+            <span class="loading-spinner-block-2"></span>
+          </span>
+          <%= gettext("Loading") %>...
+        </div>
+        <div data-items></div>
+        <a href="#" class="button button-secondary button-small float-right mt-4" data-next-page-button style="display: none;">
+          <%= gettext("Next Page") %>
+        </a>
+        <div class="button button-secondary button-small float-right mt-4" data-loading-button style="display: none;">
+          <span class="loading-spinner-small mr-2">
+            <span class="loading-spinner-block-1"></span>
+            <span class="loading-spinner-block-2"></span>
+          </span>
+          <%= gettext("Loading") %>...
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
